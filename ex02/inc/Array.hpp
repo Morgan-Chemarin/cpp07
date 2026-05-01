@@ -1,36 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iter.hpp                                           :+:      :+:    :+:   */
+/*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchemari <mchemari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/01 00:14:25 by mchemari          #+#    #+#             */
-/*   Updated: 2026/05/01 00:52:54 by mchemari         ###   ########.fr       */
+/*   Created: 2026/05/01 01:34:01 by mchemari          #+#    #+#             */
+/*   Updated: 2026/05/01 02:37:36 by mchemari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITER_HPP
-#define ITER_HPP
+#ifndef ARRAY_HPP
+#define ARRAY_HPP
 
-#include <cstddef>
-
-template <typename T>
-void iter(T* array, const std::size_t length, void (*f)(T&))
-{
-    if (!array || !f)
-        return;
-    for (std::size_t i = 0; i < length; i++)
-        f(array[i]);
-}
+#include <stddef.h>
+#include <exception>
 
 template <typename T>
-void iter(T* array, const std::size_t length, void (*f)(const T&))
+class Array
 {
-    if (!array || !f)
-        return;
-    for (std::size_t i = 0; i < length; i++)
-        f(array[i]);
-}
+    private:
+        T *_array;
+        size_t _size;
+    public:
+        Array();
+        Array(unsigned int size);
+        Array(const Array& other);
+        ~Array();
+
+        Array& operator=(const Array& other);
+        T& operator[](unsigned int n);
+
+        unsigned int size() const;
+};
+
+#include "Array.tpp"
 
 #endif
+
