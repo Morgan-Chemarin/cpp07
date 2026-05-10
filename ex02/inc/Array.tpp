@@ -6,7 +6,7 @@
 /*   By: mchemari <mchemari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 01:47:25 by mchemari          #+#    #+#             */
-/*   Updated: 2026/05/01 02:39:46 by mchemari         ###   ########.fr       */
+/*   Updated: 2026/05/10 15:56:17 by mchemari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,14 @@ Array<T>& Array<T>::operator=(const Array<T>& other)
 }
 
 template <typename T>
-T& Array<T>::operator[](unsigned int n)
+T& Array<T>::operator[](int n)
 {
-    if (n >= _size)
-        throw std::exception();
+    if (n < 0 || static_cast<unsigned int>(n) >= _size)
+    {
+        std::cout << n << std::endl;
+
+        throw Array::IsOutOfBounds();
+    }
     return _array[n];
 }
 
